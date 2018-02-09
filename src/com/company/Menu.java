@@ -18,17 +18,21 @@ public class Menu {
                 "5. check a game in \n" +
                 "6. view checked out games \n" +
                 "7. exit the program");
-
         try {
 
             switch (input.nextInt()) {
                 case 1:
+                    Library game = new Library();
+                    game.addGame();
                     //add game
                     break;
                 case 2:
+
                     //remove game
                     break;
                 case 3:
+                    GameList list = new GameList();
+                    list.Gamelist();
                     //view library
                     break;
                 case 4:
