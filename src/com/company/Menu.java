@@ -1,13 +1,15 @@
 package com.company;
 
 import java.util.InputMismatchException;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
 
     private Scanner input = new Scanner(System.in);
 
-    //menu to prompt user for library options
+    //menu to prompt user for library option
     public void startMenu () {
 
         System.out.println("Welcome to the Video Game Library, what would you like to do? \n" +
@@ -31,7 +33,7 @@ public class Menu {
                     //remove game
                     break;
                 case 3:
-                    GameList list = new GameList();
+                    Library list = new Library();
                     list.Gamelist();
                     //view library
                     break;
@@ -45,6 +47,8 @@ public class Menu {
                     //view the checked out games
                     break;
                 case 7:
+                    System.out.println("Goodbye!!");
+                    System.exit(7);
                     //exit program
                     break;
                 default:
