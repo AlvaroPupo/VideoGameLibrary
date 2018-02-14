@@ -2,12 +2,13 @@ package com.company;
 
 import java.util.InputMismatchException;
 
-import java.util.List;
+
 import java.util.Scanner;
 
 public class Menu {
 
     private Scanner input = new Scanner(System.in);
+    private Library library = new Library(this);
 
     //menu to prompt user for library option
     public void startMenu () {
@@ -20,30 +21,32 @@ public class Menu {
                 "5. check a game in \n" +
                 "6. view checked out games \n" +
                 "7. exit the program");
+
         try {
 
             switch (input.nextInt()) {
                 case 1:
-                    Library game = new Library();
-                    game.addGame();
+                    library.addGame();
                     //add game
                     break;
                 case 2:
-
+                    library.deleteGame();
                     //remove game
                     break;
                 case 3:
-                    Library list = new Library();
-                    list.Gamelist();
+                    library.Gamelist();
                     //view library
                     break;
                 case 4:
+                    library.checkOut();
                     //check out the game
                     break;
                 case 5:
+                    library.checkedInGames();
                     //check in game
                     break;
                 case 6:
+                    library.CheckedOutList();
                     //view the checked out games
                     break;
                 case 7:
@@ -58,6 +61,7 @@ public class Menu {
         } catch (InputMismatchException ime) {
             input.nextLine();
             System.out.println("select a number from 1 to 7");
+            System.out.println();
             startMenu();
 
         }
