@@ -91,7 +91,7 @@ public class Library {
         }
         firstGame = input.nextLine();
 
-        if (firstGame.equalsIgnoreCase("1")){
+        if (firstGame.equalsIgnoreCase("1")) {
             Games.removeAll(Games);
             System.out.println("All games removed.");
             System.out.println();
@@ -107,10 +107,12 @@ public class Library {
 
         if (Games.isEmpty()) {
             System.out.println("There are no games in your library to check out");
+
             System.out.println();
             menu.startMenu();
         } else {
             System.out.println("Which game would you like to check out: ");
+            System.out.println("(to select please enter the name of the game) (press 1 to cancel) (press 2 to check all the games out)");
         }
         int index = 1;
         for (String game : Games) {
@@ -118,11 +120,22 @@ public class Library {
         }
         if (index == 1) {
         }
-        System.out.println("(to select, please enter the name of the game)");
+
         firstGame2 = input.nextLine();
-        checkedOutGames.add(firstGame2);
+        if (firstGame2.equalsIgnoreCase("1")) {
+            menu.startMenu();
+        }else if (firstGame2.equalsIgnoreCase("2")){
+            checkedOutGames.addAll(Games);
+            Games.removeAll(Games);
+            System.out.println("All your games have been checked out");
+            System.out.println();
+            menu.startMenu();
+        }else {
+            checkedOutGames.add(firstGame2);
+            Games.remove(firstGame);
+        }
         Date();
-    }
+}
     public void Gamelist2() {
 
         int index = 1;
@@ -146,7 +159,7 @@ public class Library {
 
         System.out.println("What is the name of the game you would like to check in?\n(press 1 to cancel)");
         firstGame = input.nextLine();
-        if (firstGame.equalsIgnoreCase("1")){
+        if (firstGame.equalsIgnoreCase("1")) {
             menu.startMenu();
         }else {
             Games.add(firstGame);

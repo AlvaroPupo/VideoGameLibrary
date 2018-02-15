@@ -51,10 +51,13 @@ public class Menu {
                     break;
                 case 7:
                     System.out.println("Goodbye!!");
-                    System.exit(7);
+                    System.exit(0);
                     //exit program
                     break;
                 default:
+                    System.out.println("please enter a valid number!!");
+                    System.out.println();
+                    startMenu();
                     // prompt the user to pick a correct number, loop back to menu
                     break;
             }
