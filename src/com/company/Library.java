@@ -18,31 +18,31 @@ public class Library {
     private String option;
     private String add;
     Calendar calendar = Calendar.getInstance();
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy K:mm:ss a");
 
     public Library(Menu menu) {
         this.menu = menu;
     }
-
     public void addGame() {
 
-        System.out.println("What is the name of the game you would like to add?");
+        System.out.println("What is the name of the game you would like to add?\n(press 1 to cancel)");
         firstGame = input.nextLine();
-
-        Games.add(firstGame);
-
-        System.out.println("you added " + firstGame + " to your library on: " + dateFormat.format(calendar.getTime()));
-        System.out.println();
-        System.out.println("would you like to add another game? y/n");
+        if (firstGame.equalsIgnoreCase("1")){
+            menu.startMenu();
+        }else {
+            Games.add(firstGame);
+            System.out.println("you added " + firstGame + " to your library on: " + dateFormat.format(calendar.getTime()));
+            System.out.println();
+        }
+        System.out.println("would you like to add another game? yes/no");
         add = input.nextLine();
 
-        if (add.equalsIgnoreCase("y")){
+        if (add.equalsIgnoreCase("yes")) {
             oneMoreGame();
-        } else if (add.equalsIgnoreCase("n")){
-        menu.startMenu();
+        } else {
+            menu.startMenu();
+        }
     }
-    }
-
     public void Gamelist() {
 
         if (Games.isEmpty()) {
@@ -55,9 +55,9 @@ public class Library {
         Gamelist2();
         System.out.println();
     }
-
     public void multipleOption() {
 
+        System.out.println();
         System.out.println("what would you like to do? \n1. delete game\n2. Check in game\n3. Check out game\n4. go to the main menu");
         option = input.nextLine();
         if (option.equalsIgnoreCase("1")) {
@@ -81,11 +81,10 @@ public class Library {
             System.out.println();
             menu.startMenu();
         } else {
-            System.out.println("which game would you like to delete\nPress 1 to delete them all");
+            System.out.println("which game would you like to delete\n(Press 1 to delete them all)");
         }
         int index = 1;
         for (String game : Games) {
-
             System.out.println(index++ + ". " + game);
         }
         if (index == 1) {
@@ -104,7 +103,6 @@ public class Library {
         System.out.println();
         menu.startMenu();
     }
-
     public void checkOut() {
 
         if (Games.isEmpty()) {
@@ -116,31 +114,25 @@ public class Library {
         }
         int index = 1;
         for (String game : Games) {
-
             System.out.println(index++ + ". " + game);
         }
         if (index == 1) {
-
         }
         System.out.println("(to select, please enter the name of the game)");
         firstGame2 = input.nextLine();
         checkedOutGames.add(firstGame2);
         Date();
     }
-
     public void Gamelist2() {
 
         int index = 1;
         for (String game : Games) {
-
             System.out.println(index++ + ". " + game);
         }
         if (index == 1) {
-
         }
         multipleOption();
     }
-
     public void Date() {
 
         System.out.println("your game was checked out on: " + dateFormat.format(calendar.getTime()));
@@ -150,41 +142,42 @@ public class Library {
         System.out.println();
         menu.startMenu();
     }
-
     public void checkedInGames() {
 
-        if (checkedOutGames.isEmpty()){
-            System.out.println("First you need to add a game to your library!!");
-            System.out.println();
+        System.out.println("What is the name of the game you would like to check in?\n(press 1 to cancel)");
+        firstGame = input.nextLine();
+        if (firstGame.equalsIgnoreCase("1")){
             menu.startMenu();
         }else {
-            System.out.println("What is the name of the game you would like to check in?");
+            Games.add(firstGame);
+            checkedOutGames.remove(firstGame);
+            System.out.println("you checked in: " + firstGame + " on " + dateFormat.format(calendar.getTime()));
+            System.out.println();
         }
-        firstGame = input.nextLine();
-        Games.add(firstGame);
-        System.out.println("you checked in: " + firstGame + " on " + dateFormat.format(calendar.getTime()));
-        System.out.println();
-        System.out.println("would you like to check in another game? y/n");
+        System.out.println("would you like to check in another game? yes/no");
         add = input.nextLine();
-        if (add.equalsIgnoreCase("y")) {
+        if (add.equalsIgnoreCase("yes")) {
             oneMoreGame();
-        } else if (add.equalsIgnoreCase("n")){
+        } else {
             menu.startMenu();
         }
     }
     public void oneMoreGame() {
 
-        System.out.println("What is the name of the game you would like to add?");
+        System.out.println("What is the name of the game you would like to add?\n(press 1 to cancel)");
         secondGame = input.nextLine();
-        Games.add(secondGame);
-        System.out.println("you checked in " + secondGame + " on " + dateFormat.format(calendar.getTime()));
-        System.out.println();
-
-    System.out.println("Would you like to add another game? y/n");
+        if (secondGame.equalsIgnoreCase("1")){
+            menu.startMenu();
+        }else {
+            Games.add(secondGame);
+            System.out.println("you checked in " + secondGame + " on " + dateFormat.format(calendar.getTime()));
+            System.out.println();
+        }
+    System.out.println("Would you like to add another game? yes/no");
         add = input.nextLine();
-        if (add.equalsIgnoreCase("y")){
+        if (add.equalsIgnoreCase("yes")){
             addGame();
-        }else if (add.equalsIgnoreCase("n")){
+        }else{
             menu.startMenu();
         }
     }
@@ -199,7 +192,6 @@ public class Library {
             }
             int index = 1;
             for (String game : checkedOutGames) {
-
                 System.out.println(index++ + ". " + game);
             }
             if (index == 1) {
