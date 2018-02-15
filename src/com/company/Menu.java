@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Menu {
 
     private Scanner input = new Scanner(System.in);
+    /**Good way to ensure you're using the same menu each time */
     private Library library = new Library(this);
 
     //menu to prompt user for library option
