@@ -23,12 +23,15 @@ public class Library {
     public Library(Menu menu) {
         this.menu = menu;
     }
-
     public void addGame() {
 
         System.out.println("What is the name of the game you would like to add?\n(press 1 to cancel)");
         firstGame = input.nextLine();
-        if (firstGame.equalsIgnoreCase("1")) {
+        if (firstGame.equals("1")) {
+            menu.startMenu();
+        }else if (Games.contains(secondGame)){
+            System.out.println("this game is already in your library");
+            System.out.println();
             menu.startMenu();
         } else {
             Games.add(firstGame);
@@ -44,7 +47,6 @@ public class Library {
             menu.startMenu();
         }
     }
-
     public void Gamelist() {
 
         if (Games.isEmpty()) {
@@ -57,27 +59,25 @@ public class Library {
         Gamelist2();
         System.out.println();
     }
-
     public void multipleOption() {
 
         System.out.println();
         System.out.println("what would you like to do? \n1. delete game\n2. Check in game\n3. Check out game\n4. go to the main menu");
         option = input.nextLine();
-        if (option.equalsIgnoreCase("1")) {
+        if (option.equals("1")) {
             System.out.println();
             deleteGame();
-        } else if (option.equalsIgnoreCase("2")) {
+        } else if (option.equals("2")) {
             System.out.println();
             checkedInGames();
-        } else if (option.equalsIgnoreCase("3")) {
+        } else if (option.equals("3")) {
             System.out.println();
             checkOut();
-        } else if (option.equalsIgnoreCase("4")) {
+        } else if (option.equals("4")) {
             System.out.println();
             menu.startMenu();
         }
     }
-
     public void deleteGame() {
 
         if (Games.isEmpty()) {
@@ -91,11 +91,9 @@ public class Library {
         for (String game : Games) {
             System.out.println(index++ + ". " + game);
         }
-        if (index == 1) {
-        }
         firstGame = input.nextLine();
 
-        if (firstGame.equalsIgnoreCase("1")) {
+        if (firstGame.equals("1")) {
             Games.removeAll(Games);
             System.out.println("All games removed.");
             System.out.println();
@@ -107,7 +105,6 @@ public class Library {
         System.out.println();
         menu.startMenu();
     }
-
     public void checkOut() {
 
         if (Games.isEmpty()) {
@@ -123,16 +120,12 @@ public class Library {
         for (String game : Games) {
             System.out.println(index++ + ". " + game);
         }
-        /**Isn't doing anythihg */
-        if (index == 1) {
-        }
-
         /**Use better names (firstGame2 isn't really a first game) */
         firstGame2 = input.nextLine();
-        if (firstGame2.equalsIgnoreCase("1")) {
+        if (firstGame2.equals("1")) {
             menu.startMenu();
             /**Don't need to ignore case for numbers */
-        } else if (firstGame2.equalsIgnoreCase("2")) {
+        } else if (firstGame2.equals("2")) {
             checkedOutGames.addAll(Games);
             Games.removeAll(Games);
             System.out.println("All your games have been checked out");
@@ -145,7 +138,6 @@ public class Library {
         }
         Date();
     }
-
     /**Methods shouldn't start with upper-case letters. Should be lower camel-cased. */
     public void Gamelist2() {
 
@@ -153,11 +145,8 @@ public class Library {
         for (String game : Games) {
             System.out.println(index++ + ". " + game);
         }
-        if (index == 1) {
-        }
         multipleOption();
     }
-
     /**Methods shouldn't start with upper-case letters. Should be lower camel-cased. */
     public void Date() {
 
@@ -168,12 +157,15 @@ public class Library {
         System.out.println();
         menu.startMenu();
     }
-
     public void checkedInGames() {
 
         System.out.println("What is the name of the game you would like to check in?\n(press 1 to cancel)");
         firstGame = input.nextLine();
-        if (firstGame.equalsIgnoreCase("1")) {
+        if (firstGame.equals("1")) {
+            menu.startMenu();
+        }else if (Games.contains(secondGame)){
+            System.out.println("this game is already in your library");
+            System.out.println();
             menu.startMenu();
         } else {
             Games.add(firstGame);
@@ -189,12 +181,15 @@ public class Library {
             menu.startMenu();
         }
     }
-
     public void oneMoreGame() {
 
         System.out.println("What is the name of the game you would like to add?\n(press 1 to cancel)");
         secondGame = input.nextLine();
-        if (secondGame.equalsIgnoreCase("1")) {
+        if (secondGame.equals("1")) {
+            menu.startMenu();
+        }else if (Games.contains(secondGame)){
+            System.out.println("this game is already on your list, try to add another game");
+            System.out.println();
             menu.startMenu();
         } else {
             Games.add(secondGame);
@@ -204,12 +199,11 @@ public class Library {
         System.out.println("Would you like to add another game? yes/no");
         add = input.nextLine();
         if (add.equalsIgnoreCase("yes")) {
-            addGame();
+            oneMoreGame();
         } else {
             menu.startMenu();
         }
     }
-
     public void CheckedOutList() {
 
         if (checkedOutGames.isEmpty()) {
@@ -223,15 +217,17 @@ public class Library {
         for (String game : checkedOutGames) {
             System.out.println(index++ + ". " + game);
         }
-        if (index == 1) {
-        }
         System.out.println();
         System.out.println("1. Check in a game\n2. go to main menu");
         option = input.nextLine();
 
-        if (option.equalsIgnoreCase("1")) {
+        if (option.equals("1")) {
             checkedInGames();
-        } else if (option.equalsIgnoreCase("2")) {
+        }else if (checkedOutGames.isEmpty()){
+            System.out.println("there are no more games to check out");
+            System.out.println();
+            menu.startMenu();
+        } else if (option.equals("2")) {
             menu.startMenu();
         }
     }
